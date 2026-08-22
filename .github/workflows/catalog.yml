@@ -1,0 +1,48 @@
+name: catalog CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build
+        run: npm ci
+      - name: Build
+        run: npm run build
+
+  test:
+    needs:
+      - build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Test
+        run: npm run lint
+      - name: Test
+        run: npm run test:unit
+
+  security-scan:
+    needs:
+      - build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: SAST (WARNING)
+        uses: github/codeql-action/analyze@v3
+
+  deploy:
+    needs:
+      - test
+      - security-scan
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy
+        run: kubectl apply -f catalog.yaml --context k3s-vps
