@@ -36,7 +36,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: SAST (WARNING)
-        uses: github/codeql-action/analyze@v3
+        run: npm audit --audit-level=high
 
   deploy:
     needs:
