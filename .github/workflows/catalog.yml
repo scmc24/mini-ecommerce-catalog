@@ -45,4 +45,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Deploy
-        run: kubectl apply -f catalog.yaml --context k3s-vps
+        run: echo "Manual deploy: aucun deployScript/deployCommands renseigne pour ce service -- utilisez le bouton Deploy/Sync de l extension VS Code. Pour un deploiement automatique pilote par la CI, renseignez deployScript ou deployCommands dans le pipeline."
