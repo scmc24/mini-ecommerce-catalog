@@ -45,4 +45,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Deploy
-        run: echo "Manual deploy, utilisez le bouton Deploy/Sync de l extension VS Code."
+        run: echo "Manual deploy -- utilisez le bouton Deploy/Sync de l extension VS Code."
